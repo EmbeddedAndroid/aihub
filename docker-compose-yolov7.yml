@@ -1,0 +1,22 @@
+services:
+  aihub:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    device_cgroup_rules:
+    - c 226:* rmw
+    - c 10:* rmw
+    environment:
+      DISPLAY: :0
+      WAYLAND_DISPLAY: wayland-1
+      WAYLAND_USER: root
+      XDG_RUNTIME_DIR: /run/user/root
+    image: aihub:latest
+    network_mode: host
+    command: "/home/appuser/run-yolov7.sh"
+    volumes:
+    - /run/user/root:/run/user/root
+    - /dev/dri:/dev/dri
+    - /dev/pvr_sync:/dev/pvr_sync
+    - /tmp/.X11-unix:/tmp/.X11-unix
+version: "3.6"

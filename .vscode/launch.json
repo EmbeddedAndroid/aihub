@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        
+
+        {
+            "name": "Docker: Python - General",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "docker-run: debug",
+            "python": {
+                "pathMappings": [
+                    {
+                        "localRoot": "${workspaceFolder}",
+                        "remoteRoot": "/home/appuser"
+                    }
+                ],
+                "projectType": "general"
+            }
+        }
+    ]
+}

@@ -1,0 +1,37 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "docker-build",
+			"label": "docker-build-base",
+			"platform": "python",
+			"dockerBuild": {
+				"tag": "aihub:latest",
+				"dockerfile": "${workspaceFolder}/Dockerfile",
+				"context": "${workspaceFolder}",
+				"buildArgs": {"AIHUB_TOKEN":""},
+		}
+		},
+		{
+			"type": "docker-build",
+			"label": "docker-build-debug",
+			"platform": "python",
+			"dockerBuild": {
+				"tag": "aihub-debug:latest",
+				"dockerfile": "${workspaceFolder}/Dockerfile.perf.debug",
+				"context": "${workspaceFolder}",
+			}
+		},
+		{
+			"type": "docker-run",
+			"label": "docker-run: debug",
+			"dependsOn": [
+				"docker-build-base",
+				"docker-build-debug"
+			],
+			"python": {
+				"file": "perf-analysis-mobilenetv2.py"
+			}
+		}
+	]
+}
