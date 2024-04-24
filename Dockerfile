@@ -28,10 +28,14 @@ RUN pip install "qai_hub_models[yolov7]"
 
 RUN pip install shapely
 
+RUN pip install transformers
+
+RUN pip install timm
+
 COPY perf-analysis-mobilenetv2.py /home/appuser/perf-analysis-mobilenetv2.py
 
-COPY run-yolov7.sh /home/appuser/run-yolov7.sh
+COPY run.sh /home/appuser/run.sh
 
-RUN chmod a+x /home/appuser/run-yolov7.sh
+RUN chmod a+x /home/appuser/run.sh
 
 CMD ['python', '/home/appuser/perf-analysis-mobilenetv2.py']
